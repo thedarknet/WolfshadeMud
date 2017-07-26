@@ -61,6 +61,7 @@ int main(int agrc, char *argv[]) {
 	   //cGRR or GVM!
 	   CMudTime MudTime;
 	   CGame Wolfshade(strOpts);
+	   GVM.Game = &Wolfshade;
 
 	   Wolfshade.Heartbeat(MudTime);
 	}

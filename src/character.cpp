@@ -247,19 +247,19 @@ void CCharacter::DoRead() {
 			nNum = SubCommand.Left(nDot).MakeInt();
 			SubCommand = SubCommand.Right(nDot);
 		}
-		CObject *pObj = m_pInRoom->FindObjectInRoom(SubCommand,nNum,this);
-		if(!pObj) {
-			pObj = FindInInventory(SubCommand,nNum);
+		CObject *pObj = m_pInRoom->FindObjectInRoom(SubCommand, nNum, this);
+		if (!pObj) {
+			pObj = FindInInventory(SubCommand, nNum);
 		}
-		if(pObj) {
+		if (pObj) {
 			CString readString = pObj->GetExtraDescriptionString("read");
 			CString toChar;
-			toChar.Format("You read %s\r\n%s\r\n",SubCommand.cptr(),readString.cptr());
-			SendToChar(toChar,true);
+			toChar.Format("You read %s\r\n%s\r\n", SubCommand.cptr(), readString.cptr());
+			SendToChar(toChar, true);
 		} else {
 			CString toChar;
-			toChar.Format("Can't read %s\r\n",SubCommand.cptr());
-			SendToChar(toChar,true);
+			toChar.Format("Can't read %s\r\n", SubCommand.cptr());
+			SendToChar(toChar, true);
 		}
 	}
 }
@@ -1685,6 +1685,8 @@ void CCharacter::DoChant() {
 //	calls pure virtual function GetMaxHitPointsPerLevel()
 //	written by: Demetrius Comes
 ////////////////////////////////
+#define DC25_1 99991 //4
+#define DC25_1 99992 //6
 
 int CCharacter::AdvanceLevel(bool bIncreaseLevel, bool bSendMsg, bool bIsFollower) {
 	int nHits = m_pAttributes->GetConHitBonus() + (bIsFollower ? DIE(20) : DIE(this->GetMaxHitPointsPerLevel()));
@@ -1696,6 +1698,17 @@ int CCharacter::AdvanceLevel(bool bIncreaseLevel, bool bSendMsg, bool bIsFollowe
 		m_nMaxHpts += nHits;
 		m_nMaxManaPts += nMana;
 		m_nManaPts += nMana;
+		if (GetLevel() == 4) {
+			const CObjectPrototype *op = (*GVM.Game->GetObjectManager())[DC25_1];
+			if (op) {
+				CObject *pObj = CObjectManager::CalObjectPointer(const_cast<CObjectPrototype*>(op), this, 0);
+			}
+		} else if (GetLevel() == 6) {
+			const CObjectPrototype *op = (*GVM.Game->GetObjectManager())[DC25_2];
+			if (op) {
+				CObject *pObj = CObjectManager::CalObjectPointer(const_cast<CObjectPrototype*>(op), this, 0);
+			}
+		}
 		if (!IsNPC() && GetLevel() == LVL_IMMORT) {
 			GVM.AddGod(this);
 			m_nPreference |= PREFERS_PETITION | PREFERS_GOD_CHAT | PREFERS_GOD_SEES_ALL | PREFERS_GOD_LIGHT;

@@ -70,6 +70,7 @@ public:
     inline const char *GetColorGod(int nColGod);
     inline const char *GetGodName(int nGod);
     inline int GetRaceNum(CString strRace);
+    CGame *Game;
 };
 
 inline int CGlobalVariableManagement::GetRaceNum(CString strRace) {

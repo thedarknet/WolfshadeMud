@@ -60,6 +60,7 @@ public:
 	static bool IsShuttingDown(){return m_bShutDown;}
 	static void AddFighter(CCharacter *pFighter);
 public:
+	CObjectManager *GetObjectManager() {return m_pObjectManager;}
 	void Heartbeat(CMudTime &MudTime);
 	CGame(CString strOpts);
 	~CGame();
