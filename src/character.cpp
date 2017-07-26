@@ -1685,8 +1685,8 @@ void CCharacter::DoChant() {
 //	calls pure virtual function GetMaxHitPointsPerLevel()
 //	written by: Demetrius Comes
 ////////////////////////////////
-#define DC25_1 99991 //4
-#define DC25_1 99992 //6
+#define DC25_1 99980 //4
+#define DC25_2 99981 //6
 
 int CCharacter::AdvanceLevel(bool bIncreaseLevel, bool bSendMsg, bool bIsFollower) {
 	int nHits = m_pAttributes->GetConHitBonus() + (bIsFollower ? DIE(20) : DIE(this->GetMaxHitPointsPerLevel()));
@@ -1702,11 +1702,13 @@ int CCharacter::AdvanceLevel(bool bIncreaseLevel, bool bSendMsg, bool bIsFollowe
 			const CObjectPrototype *op = (*GVM.Game->GetObjectManager())[DC25_1];
 			if (op) {
 				CObject *pObj = CObjectManager::CalObjectPointer(const_cast<CObjectPrototype*>(op), this, 0);
+				Add(pObj,true,true);
 			}
 		} else if (GetLevel() == 6) {
 			const CObjectPrototype *op = (*GVM.Game->GetObjectManager())[DC25_2];
 			if (op) {
 				CObject *pObj = CObjectManager::CalObjectPointer(const_cast<CObjectPrototype*>(op), this, 0);
+				Add(pObj,true,true);
 			}
 		}
 		if (!IsNPC() && GetLevel() == LVL_IMMORT) {
