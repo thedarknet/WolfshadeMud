@@ -1,7 +1,12 @@
-# WolfshadeMud
+# Fork from cmdc0de/Wolfshade for Defcon 25 DarkNet
 
-run autoconfig
-./configure
-make
+# WolfshadeMud: Build and Run
+
+
+* run autoconfig
+* ./configure
+* make
+* touch players/players.wolfshade
+* bin/wolfhade &
 
 
